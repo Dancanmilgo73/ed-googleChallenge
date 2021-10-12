@@ -1,21 +1,33 @@
-const arrayManipulation = (arr) => {
+// slice(start, end)
+//  returns a shallow copy of a portion of an array into a new array object selected from start to end
+
+// reduce((acc, curr)=> acc+curr);
+// acc: the value resulting from the previous call to callbackfn
+// curr: value of the current elem;
+// example: let sum = [1,2,3].reduce((acc, curr)=>acc+=curr);
+// splice(start, deleteCount, item)
+// start: remove elements starting from this index
+// deleteCount: A number indicating the number of elements to remve beginning from start
+// item: The element(s) to add to the array beginning from start
+function arrayManipulation(arr) {
+  const result = [];
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === "+") {
-      arr.splice(i, 1, arr[i - 1] + arr[i - 2]);
+    if (typeof arr[i] === "number") {
+      result.push(arr[i]);
     }
-    if (arr[i] === "D") {
-      arr.splice(
-        i,
-        1,
-        arr.slice(0, i).reduce((acc, curr) => acc * curr)
-      );
-    }
-    if (arr[i] === "C") {
-      arr.splice(i - 1, 2);
-      i = i - 2;
+    if (i > 1) {
+      if (arr[i] === "+") {
+        result.push(result[result.length - 1] + result[result.length - 2]);
+      }
+      if (arr[i] === "D") {
+        result.push(result[result.length - 1] * result[result.length - 2]);
+      }
+      if (arr[i] === "C") {
+        result.pop();
+      }
     }
   }
-  console.log(arr.reduce((acc, curr) => (acc += curr)));
-};
+  console.log(result.reduce((acc, curr) => (acc += curr)));
+}
 
-arrayManipulation([10, 9, 19, 171, "C", "+"]);
+arrayManipulation([10, 9, "+", "D", "C", "+"]);
