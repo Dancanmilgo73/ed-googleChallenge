@@ -9,7 +9,7 @@ const arrayManipulation = (arr) => {
 
     arr[i];
   }
-  return arr;
+  return arr.reduce((acc, curr) => (acc += curr), 0);
 };
 
 console.log(arrayManipulation([10, 9, 19, 171, "C", "+"]));
